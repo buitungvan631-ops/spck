@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+
+
+    <title>Bootstrap Example</title>
+
+    <style>
+        .navbar img {
+            height: 40px;
+            width: 76px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* ==============================
+           CONTAINER
+        ============================== */
+
+        .checkout-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .checkout-left,
+        .checkout-right {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        .checkout-left h1 {
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .checkout-left h2 {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            font-size: 15px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+
+        /* ==============================
+           THANH TOÁN
+        ============================== */
+
+        .payment-method {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .payment-method label {
+            padding: 15px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            cursor: pointer;
+        }
+
+        .payment-method input {
+            margin-right: 8px;
+        }
+
+
+        /* ==============================
+           SẢN PHẨM
+        ============================== */
+
+        .checkout-right h2 {
+            margin-top: 0;
+        }
+
+        .order-product {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-product img {
+            width: 120px;
+            height: 120px;
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+        .order-info {
+            min-width: 0;
+        }
+
+        .order-info h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .order-info p {
+            margin: 7px 0;
+            color: #555;
+        }
+
+
+        /* ==============================
+           TỔNG TIỀN
+        ============================== */
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-top: 25px;
+            padding-top: 20px;
+
+            border-top: 2px solid #111;
+
+            font-size: 20px;
+        }
+
+        #totalPrice {
+            color: #e60000;
+            font-size: 24px;
+        }
+
+
+        /* ==============================
+           NÚT ĐẶT HÀNG
+        ============================== */
+
+        .order-btn {
+            width: 100%;
+
+            margin-top: 30px;
+            padding: 15px;
+
+            border: none;
+            border-radius: 30px;
+
+            background: #111;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .order-btn:hover {
+            background: #333;
+        }
+
+
+        /* ==============================
+           TRANG ĐẶT HÀNG THÀNH CÔNG
+        ============================== */
+
+        .success-page {
+            display: none;
+
+            min-height: 100vh;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            background: #f5f5f5;
+        }
+
+        .success-box {
+            width: 500px;
+            max-width: 90%;
+
+            padding: 50px;
+
+            background: white;
+
+            border-radius: 15px;
+        }
+
+        .success-box h1 {
+            margin-bottom: 15px;
+        }
+
+        .success-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .home-btn {
+            display: inline-block;
+
+            margin-top: 20px;
+            padding: 13px 30px;
+
+            border-radius: 30px;
+
+            background: #111;
+            color: white;
+
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-btn:hover {
+            background: #333;
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 800px) {
+
+            .checkout-container {
+                grid-template-columns: 1fr;
+                margin: 20px auto;
+            }
+
+        }
+
+
+        .navbar {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1050 !important;
+        }
+    </style>
+</head>
+
+
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+    <img src="https://www.aulagaming.com/cdn/shop/files/F7E46230B70DA77297EC7FEB58290784_2_bea3b928-76eb-4d57-a5c1-2bae88bb7fdf_260x.png?v=1758537970"
+        alt="">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="spck1.html">GearVN.com</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Thông báo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="gio-hang.html">Giỏ hàng</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tài khoản
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="dangki.html">Đăng kí</a></li>
+                        <li><a class="dropdown-item" href="SS8_Login.html">Đăng nhập</a></li>
+
+                    </ul>
+
+
+                </li>
+
+            </ul>
+
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2 align-items-center" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-black-search d-flex align-items-center" type="submit">
+
+                    <svg xmlns="http://w3.org" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </button>
+            </form>
+
+
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+<!-- ==========================================
+         TRANG ĐẶT HÀNG
+    =========================================== -->
+
+<div class="checkout-container" id="checkoutPage">
+
+
+    <!-- ======================================
+             THÔNG TIN KHÁCH HÀNG
+        ======================================= -->
+
+    <div class="checkout-left">
+
+        <h1>Thông tin đặt hàng</h1>
+
+
+        <div class="form-group">
+
+            <label for="customerName">
+                Họ và tên
+            </label>
+
+            <input type="text" id="customerName" placeholder="Nhập họ và tên">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="customerPhone">
+                Số điện thoại
+            </label>
+
+            <input type="tel" id="customerPhone" placeholder="Nhập số điện thoại">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="customerAddress">
+                Địa chỉ nhận hàng
+            </label>
+
+            <textarea id="customerAddress" placeholder="Nhập địa chỉ nhận hàng"></textarea>
+
+        </div>
+
+
+        <!-- ==================================
+                 PHƯƠNG THỨC THANH TOÁN
+            =================================== -->
+
+        <h2>Phương thức thanh toán</h2>
+
+        <div class="payment-method">
+
+            <label>
+
+                <input type="radio" name="payment" value="cod" checked>
+
+                Thanh toán khi nhận hàng (COD)
+
+            </label>
+
+
+            <label>
+
+                <input type="radio" name="payment" value="bank">
+
+                Chuyển khoản ngân hàng
+
+            </label>
+
+        </div>
+
+
+        <button id="orderBtn" class="order-btn">
+            Đặt hàng
+        </button>
+
+    </div>
+
+
+
+    <!-- ======================================
+             THÔNG TIN ĐƠN HÀNG
+        ======================================= -->
+
+    <div class="checkout-right">
+
+        <h2>Đơn hàng</h2>
+
+        <div id="orderProduct"></div>
+
+
+        <div class="total">
+
+            <span>
+                Tổng tiền
+            </span>
+
+            <strong id="totalPrice">
+                $0.00
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+         TRANG ĐẶT HÀNG THÀNH CÔNG
+    =========================================== -->
+
+<div class="success-page" id="successPage">
+
+    <div class="success-box">
+
+        <h1>
+            Đặt hàng thành công!
+        </h1>
+
+        <p>
+            Cảm ơn bạn đã mua hàng.
+        </p>
+
+        <p>
+            Đơn hàng của bạn đã được ghi nhận.
+        </p>
+
+        <a href="spck1.html" class="home-btn">
+            Về trang chủ
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+         DỮ LIỆU SẢN PHẨM
+    =========================================== -->
+
+<script src="product.js"></script>
+
+
+
+<script>
+
+    // ==========================================
+    // LẤY ID + QUANTITY TỪ URL
+    // ==========================================
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const productId =
+        Number(params.get("id"));
+
+    const quantityFromUrl =
+        Number(params.get("quantity"));
+
+
+    // Đảm bảo quantity luôn >= 1
+    const quantity =
+        quantityFromUrl > 0
+            ? quantityFromUrl
+            : 1;
+
+
+
+    // ==========================================
+    // TÌM SẢN PHẨM
+    // ==========================================
+
+    let product = null;
+
+
+    for (const category of Object.values(products)) {
+
+        const found =
+            category.find(item => item.id === productId);
+
+        if (found) {
+
+            product = found;
+
+            break;
+        }
+
+    }
+
+
+
+    // ==========================================
+    // KIỂM TRA SẢN PHẨM
+    // ==========================================
+
+    if (!product) {
+
+        document.getElementById("checkoutPage").innerHTML = `
+                <h2>Không tìm thấy sản phẩm.</h2>
+            `;
+
+    } else {
+
+
+        // ======================================
+        // HIỂN THỊ THÔNG TIN SẢN PHẨM
+        // ======================================
+
+        document.getElementById("orderProduct").innerHTML = `
+
+                <div class="order-product">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                    >
+
+                    <div class="order-info">
+
+                        <h3>
+                            ${product.name}
+                        </h3>
+
+                        <p>
+                            Đơn giá:
+                            <strong>
+                                $${Number(product.price).toFixed(2)}
+                            </strong>
+                        </p>
+
+                        <p>
+                            Số lượng:
+                            <strong>
+                                ${quantity}
+                            </strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+
+        // ======================================
+        // TÍNH TỔNG TIỀN
+        // ======================================
+
+        const price =
+            Number(product.price);
+
+        const total =
+            price * quantity;
+
+
+        document.getElementById("totalPrice").innerText =
+            "$" + total.toFixed(2);
+
+
+
+        // ======================================
+        // NÚT ĐẶT HÀNG
+        // ======================================
+
+        document.getElementById("orderBtn")
+            .addEventListener("click", () => {
+
+
+                const name =
+                    document
+                        .getElementById("customerName")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("customerPhone")
+                        .value
+                        .trim();
+
+
+                const address =
+                    document
+                        .getElementById("customerAddress")
+                        .value
+                        .trim();
+
+
+                // Kiểm tra thông tin
+
+                if (!name || !phone || !address) {
+
+                    alert(
+                        "Vui lòng nhập đầy đủ thông tin!"
+                    );
+
+                    return;
+                }
+
+
+
+                // ==================================
+                // ẨN TRANG ĐẶT HÀNG
+                // ==================================
+
+                document.getElementById("checkoutPage")
+                    .style.display = "none";
+
+
+                // ==================================
+                // HIỆN TRANG THÀNH CÔNG
+                // ==================================
+
+                document.getElementById("successPage")
+                    .style.display = "flex";
+
+            });
+
+    }
+
+</script>
+
+
+
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
